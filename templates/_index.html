@@ -18,6 +18,18 @@
 
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css" id="highlight-theme">
+        <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css">
+        <link rel="stylesheet" href="bower_components/codemirror/theme/lesser-dark.css">
+
+        <style type="text/css">
+        .CodeMirror pre {
+            text-align: left;
+            font-family: monospace;
+        }
+        .big-button {
+            font-size: 2em;
+        }
+        </style>
 
         <!-- If the query includes 'print-pdf', use the PDF print sheet -->
         <script>
@@ -54,6 +66,8 @@
         <script src="bower_components/reveal.js/lib/js/head.min.js"></script>
         <script src="bower_components/reveal.js/js/reveal.min.js"></script>
         <script src="bower_components/rxjs/rx.js"></script>
+        <script src="bower_components/codemirror/lib/codemirror.js"></script>
+        <script src="bower_components/codemirror/mode/javascript/javascript.js"></script>
         <script>
             // Configure Reveal
             // Full list of configuration options available here:
@@ -69,7 +83,8 @@
 
                 // Optional libraries used to extend on reveal.js
                 dependencies: [
-                    { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() {
+                        return !document.body.classList; } },
                     { src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },

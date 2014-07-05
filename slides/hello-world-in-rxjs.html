@@ -1,15 +1,10 @@
 <section>
 	<h2>Hello World in RX.js</h2>
-
-	<pre>
-		<code>
-function getEvents(){
-  return new Rx.Observable();
-}
-
-function hi(){
-	var obs = getEvents();
-}
-		</code>
-	</pre>
+	<button onclick="hullo()" class="big-button">hullo()</button>
+	<textarea class="CodeMirror">
+var o = new Rx.Subject('hello');
+function hullo(){o.onNext("hello wurld")}
+function world(s){alert(s)}
+o.subscribe(world);
+	</textarea>
 </section>
