@@ -5,19 +5,19 @@
     'use strict';
 
     var codeMirror = window.CodeMirror;
-    var console = window.console;
-    var handleCode = window.eval;
+    var handleCode = function (cm) { window.eval(cm.getDoc().getValue()); };
 
     var setupCodeMirror = function setupCodeMirror() {
         var keymap = {};
-        keymap['Ctrl-Enter'] = function (cm) { handleCode(cm.getDoc().getValue()); };
+        keymap['Ctrl-Enter'] = handleCode;
         var opts = {mode: 'javascript', theme: 'lesser-dark', extraKeys: keymap};
         var myTextArea = document.querySelector('textarea.CodeMirror');
         if (myTextArea) {
             opts.value = myTextArea.value;
-            codeMirror(function (elt) {
+            var cm = codeMirror(function (elt) {
                 myTextArea.parentNode.replaceChild(elt, myTextArea);
             }, opts);
+            setTimeout(function () { cm.refresh(); handleCode(cm); }, 0);
         }
     };
 

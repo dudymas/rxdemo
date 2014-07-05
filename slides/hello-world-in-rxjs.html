@@ -6,5 +6,21 @@ var o = new Rx.Subject('hello');
 function hullo(){o.onNext("hello wurld")}
 function world(s){alert(s)}
 o.subscribe(world);
-	</textarea>
+</textarea>
+</section>
+<section>
+	<h2>A more "idiomatic" hello world...</h2>
+	<button onclick="btnObserver.click()" class="big-button">btnObserver.click()</button>
+	<p class="smaller-code"><textarea class="CodeMirror">
+function buttonObserver(obs){
+	this.click = function(){obs.onNext("Hello!")};
+}
+function eventAlerter(obs){
+	this.alert = function(msg){window.alert(msg)};
+	obs.subscribe(this.alert);
+}
+var subject = new Rx.Subject('hello world');
+var btnObserver = new buttonObserver(subject);
+var btnAlerts = new eventAlerter(subject);
+</textarea></p>
 </section>
