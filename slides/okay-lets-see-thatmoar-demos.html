@@ -1,3 +1,40 @@
-<h2>Okay. Let's see that...(Moar demos)</h2>
+<section>
+	<h2>Okay. Let's see that...(Moar demos)</h2>
+	<p><button onclick="btnClicked()">onclick="btnClicked()"</button></p>
+	<p class="smaller-code">
+		<textarea class="CodeMirror">
+var subj = new Rx.Subject('clickety clack');
+var count = 0;
 
-<p>Please change me!</p>
+function btnClicked(){ subj.onNext( count = count + 1); }
+function isodd(count){ return count % 2;}
+
+var oddClicks = subj.where(isodd);
+oddClicks.subscribe(function(count){alert(count);});
+		</textarea>
+	</p>
+</section>
+<section>
+	<h2>Search bar:</h2>
+	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:2em" /></p>
+	<p class="smaller-code">
+		<textarea class="CodeMirror">
+var keypress = new Rx.Subject();
+var charCodes = keypress.select(function(e){return e.charCode;});
+var chars = charCodes.select(function(cc){ return String.fromCharCode(cc);});
+
+chars.subscribe(function(c){alert(c);});</textarea>
+	</p>
+</section>
+<section>
+	<h2>Search bar simplified:</h2>
+	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:2em" /></p>
+	<p>
+		<textarea class="CodeMirror">
+var keypress = new Rx.Subject();
+var charCodes = keypress.pluck('charCode');
+var chars = charCodes.select(String.fromCharCode);
+
+chars.subscribe(function(c){alert(c);});</textarea>
+	</p>
+</section>
