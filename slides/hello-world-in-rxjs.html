@@ -3,12 +3,14 @@
 	<p>
 		<button onclick="hullo()" class="big-button">onclick="hullo()"</button>
 	</p>
+	<p>
 	<textarea class="CodeMirror">
 var o = new Rx.Subject('hello');
 function hullo(){o.onNext('hello wurld')}
 function world(s){alert(s)}
 o.subscribe(world);
 </textarea>
+	</p>
 </section>
 <section>
 	<h2>A more "idiomatic" hello world...</h2>

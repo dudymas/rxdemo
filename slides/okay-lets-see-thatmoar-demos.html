@@ -16,7 +16,7 @@ oddClicks.subscribe(function(count){alert(count);});
 </section>
 <section>
 	<h2>Search bar:</h2>
-	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:2em" /></p>
+	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:1.2em; width: 18em" placeholder='onkeypress="keypress.onNext(event)"'/></p>
 	<p class="smaller-code">
 		<textarea class="CodeMirror">
 var keypress = new Rx.Subject();
@@ -28,7 +28,7 @@ chars.subscribe(function(c){alert(c);});</textarea>
 </section>
 <section>
 	<h2>Search bar simplified:</h2>
-	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:2em" /></p>
+	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:1.2em; width: 18em" placeholder='onkeypress="keypress.onNext(event)"'/></p>
 	<p>
 		<textarea class="CodeMirror">
 var keypress = new Rx.Subject();
