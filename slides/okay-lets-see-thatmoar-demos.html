@@ -20,10 +20,17 @@ oddClicks.subscribe(function(count){alert(count);});
 	<p class="smaller-code">
 		<textarea class="CodeMirror">
 var keypress = new Rx.Subject();
-var charCodes = keypress.select(function(e){return e.charCode;});
-var chars = charCodes.select(function(cc){ return String.fromCharCode(cc);});
+var el = document.querySelector('#value-disp');
+var search = keypress.throttle(500).select(function(ev){return ev.target.value;});
+search.subscribe(function(text){el.textContent = text;});
+var terms = search.selectMany(function(txt){return Rx.Observable.fromArray(txt.split(/\s+/));});
+terms.subscribe(function(t){if (t) alert(t);});
 
-chars.subscribe(function(c){alert(c);});</textarea>
+</textarea>
+	</p>
+	<p>
+		<h3>#value-disp:</h3>
+		<h3 id="value-disp">{}</h3>
 	</p>
 </section>
 <section>
