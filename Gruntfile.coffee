@@ -1,4 +1,7 @@
 # Generated on 2014-05-12 using generator-reveal 0.3.4
+http = require 'http'
+connect = require 'connect'
+serveStatic = require 'serve-static'
 module.exports = (grunt) ->
 
     grunt.initConfig
@@ -38,9 +41,8 @@ module.exports = (grunt) ->
                     port: 9000
                     # Change hostname to '0.0.0.0' to access
                     # the server from outside.
-                    hostname: 'localhost'
+                    hostname: '0.0.0.0'
                     base: '.'
-                    open: true
                     livereload: true
 
         coffeelint:
@@ -101,6 +103,16 @@ module.exports = (grunt) ->
             'coffeelint'
             'jshint'
         ]
+
+    grunt.registerTask 'headless',
+        'Run presentation on separate host.',
+        (port) ->
+            done = this.async()
+            app = connect()
+            app.use(serveStatic('.'))
+            server = http.createServer(app)
+            server.listen(port)
+            server.on('close', done)
 
     grunt.registerTask 'server',
         'Run presentation locally and start watch process (living document).', [
