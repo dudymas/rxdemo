@@ -13,6 +13,36 @@ o.subscribe(world);
 	</p>
 </section>
 <section>
+	<p>The Auction</p>
+	<div style="padding: 1em">
+		<span>The subject:</span><div id="subj1" class="viewer"></div>
+	</div>
+	<br />
+	<div>
+		<p>
+			observers:
+		</p>
+		<p>
+			<div id="subj1_v1" class="viewer"></div>
+			<div id="subj1_v2" class="viewer"></div>
+			<div id="subj1_v3" class="viewer"></div>
+		</p>
+	</div>
+</section>
+<section>
+	<p>The code</p>
+	<p>
+		<textarea class="CodeMirror">
+var auction = Rx.Subject('auction'), bids = Rx.Subject('bids');
+function announce(bid){ auction.onNext(bid+1); }
+function bid(amt, delay){ setTimeout(function(){bids.onNext(amt);}, delay);}
+function bidder1(price){ if(price == 1) bid(3, 200); else bid(price+1, 600);}
+function bidder2(price){ if(price == 6) bid(9, 400); else bid(price+1, 800);}
+function bidder3(price){ if(price == 3) bid(6, 300); else bid(price+1, 700);}
+</textarea>
+	</p>
+</section>
+<section>
 	<h2>A more "idiomatic" hello world...</h2>
 	<p>
 		<button onclick="btnObserver.click()" class="big-button">onclick="btnObserver.click()"</button>
