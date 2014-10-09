@@ -1,3 +1,56 @@
-<h2>Does it work well with testing?</h2>
+<section>
+	<h2>Does it work well with testing?</h2>
+</section>
+<section>
+<h3>how would you test this?</h3>
+	<p>
+	<textarea class="CodeMirror">
+var o = new Rx.Subject('hello');
+function hullo(){o.onNext('hello wurld')}
+function world(s){alert(s)}
+o.subscribe(world);
+</textarea>
+	</p>
+</section>
+<section>
+	<h2>Search bar simplified:</h2>
+	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:1.2em; width: 18em" placeholder='onkeypress="keypress.onNext(event)"'/></p>
+	<p class="smaller-code">
+		<textarea class="CodeMirror">
+var keypress = new Rx.Subject();
+var charCodes = keypress.pluck('charCode');
+var chars = charCodes.select(String.fromCharCode);
 
-<p>Please change me!</p>
+chars.subscribe(function(c){alert(c);});</textarea>
+	</p>
+</section>
+<section>
+	<h3>With jasmine (duh):</h3>
+	<p>
+	<textarea class="CodeMirror">
+function world(s){alert(s)}
+describe('world()',function(){
+	it('alerts', function(){
+		world('surprise!');
+	});
+});</textarea>
+</p>
+</section>
+<section>
+	<h3>Okay, ideally use 'objects'...</h3>
+	<textarea class="CodeMirror">
+		describe('world()',function(){
+			var result = null;
+			function dummy_alert(){result = arguments};
+			var listener = new Listener(dummy_alert);
+			it('alerts', function(){
+				listener.world('surprise!');
+				//check arguments, etc.
+			});
+		});
+	</textarea>
+</section>
+<section>
+	<h2>Look at the official repo:</h2>
+	<h3><a href="https://github.com/Reactive-Extensions/RxJS/blob/master/examples/testing/jasmine/spec/SelectSpec.js">github.com/Reactive-Extensions/RxJS/blob/master/examples/testing</a></h3>
+</section>

@@ -19,13 +19,17 @@ oddClicks.subscribe(function(count){alert(count);});
 	<p><input type="text" onkeypress="keypress.onNext(event)" style="font-size:1.2em; width: 18em" placeholder='onkeypress="keypress.onNext(event)"'/></p>
 	<p class="smaller-code">
 		<textarea class="CodeMirror">
-var keypress = new Rx.Subject();
-var el = document.querySelector('#value-disp');
-var search = keypress.throttle(500).select(function(ev){return ev.target.value;});
-search.subscribe(function(text){el.textContent = text;});
-var terms = search.selectMany(function(txt){return Rx.Observable.fromArray(txt.split(/\s+/));});
-terms.subscribe(function(t){if (t) alert(t);});
+var keypress = Rx.Subject();
+var content = function(ev){return ev.target.value;}
+var search_event = keypress.throttle(1000).select(content);
+var divide_search = function(txt){
+  return Rx.Observable.fromArray(txt.split(/\s+/));
+}
 
+search_event.selectMany(divide_search).subscribe(alert);
+search_event.subscribe(function(text){
+  document.querySelector('#value-disp').textContent = text;
+});
 </textarea>
 	</p>
 	<p>
